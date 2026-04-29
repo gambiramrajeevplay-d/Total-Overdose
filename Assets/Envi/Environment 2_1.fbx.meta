@@ -1,0 +1,249 @@
+fileFormatVersion: 2
+guid: dbc5481096294b54897371ad4a847206
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Buildings_Atlas_2
+    second: {fileID: 2100000, guid: 49b67576bf5604a40bbf26a136cec3fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fence_2
+    second: {fileID: 2100000, guid: 33bcecbc89cf18b46986c746f890775d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MP_terrain_Basemap_Diffuse_x0_y0
+    second: {fileID: 2100000, guid: e4b68fc9807ff1f4697098ea29589629, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MP_terrain_Basemap_Diffuse_x0_y1
+    second: {fileID: 2100000, guid: 4076775721744c44f8264ead174bab53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MP_terrain_Basemap_Diffuse_x1_y0
+    second: {fileID: 2100000, guid: 747f8452bd2ca4e4981d27a0df35e0f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MP_terrain_Basemap_Diffuse_x1_y1
+    second: {fileID: 2100000, guid: 7b203749600c2fa45afc68474f64ab39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_Png
+    second: {fileID: 2100000, guid: f62f17ba672386547975b1c2ce40e21b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: container_atlas
+    second: {fileID: 2100000, guid: 5ed606525b6f1934eb20eda97026b759, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ground3_desaturate_1
+    second: {fileID: 2100000, guid: b5e437ba6129a0b44a2896a35ee8fcdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: main_building_atlas
+    second: {fileID: 2100000, guid: 8f2e9349b409c6340be99307b061c46f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: side_fence
+    second: {fileID: 2100000, guid: 0a30c270faa9c82478ec1533e238d21a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tree_barks_atlas
+    second: {fileID: 2100000, guid: 9a8ba5d9006672b469cc7bc27d50a25a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trees_Leaves_atlases
+    second: {fileID: 2100000, guid: 0390780265cc5e644aa810014357e4e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trees_round
+    second: {fileID: 2100000, guid: 09a8d4382870a254bab40f9440f689d0, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 0713bcf64eb4486f90a24557e79a87b3_RGB_MP terrain_Basemap_Diffuse_x1_y1
+    second: {fileID: 2800000, guid: 49286a9e7b4e15644ac92ef02561f33f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 1bdb23df6cd248be975240985b769cab_RGB_Fence 2
+    second: {fileID: 2800000, guid: 98ade91b4a13e734193453132ba3f0d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 1f6e78a13e69466ba59dd394a97640d4_RGB_MP terrain_Basemap_Diffuse_x1_y0
+    second: {fileID: 2800000, guid: 5b6e1b125843fd640bf87ac2757f17c1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 2052d199606d40fe8349bc9259af5f46_RGB_trees Leaves atlases
+    second: {fileID: 2800000, guid: a433c5b618b175c479e3a105cb4b9aae, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 24d303f17776479291f20b57a639c92c_RGB_main building atlas
+    second: {fileID: 2800000, guid: 9afb50185bedd7b43b8e1cf643dd24ab, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 279b444195df4b7db70e619b8b314621_RGB_ground3_desaturate.1
+    second: {fileID: 2800000, guid: b25c534cdbbcace49bd1434255111afa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 4f3cddfce4934aca86e30864036d993e_RGB_MP terrain_Basemap_Diffuse_x0_y0
+    second: {fileID: 2800000, guid: a98783060b3565e418299464026c1f59, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 61eb21d6f8194496911109ae17482dbf_RGB_container atlas
+    second: {fileID: 2800000, guid: 1be0a5adec117b74fb73359e1f47c90f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 7082111bdbc0445b8be39dadc4d9c5a5_RGB_MP terrain_Basemap_Diffuse_x0_y1
+    second: {fileID: 2800000, guid: 555af903643641e46aa80cb3b839ad68, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 729c074469804fbda36bce7c83eff3a4_RGB_side fence
+    second: {fileID: 2800000, guid: edcceb8a09c6afc449692f0a4fd5343f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 94ea7a86784c4e24a1691b1d6e5ea94b_RGB_Buildings Atlas 2
+    second: {fileID: 2800000, guid: 9d027d934efbb2341a9703912433900b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: c861123d09ea4d57ad1475d896d334d1_RGB_trees-round
+    second: {fileID: 2800000, guid: 74c83454665f9da4cb2515fd565b553e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: cafd67e946454b908f00fb1d29f74462_RGB_Props Png
+    second: {fileID: 2800000, guid: 959d9ab2eb32b9b42985fb64658eca7a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ccbe40ceb9b54d4785d6826bc7d9dab5_RGB_tree barks atlas
+    second: {fileID: 2800000, guid: fdfcf1d8ea798244986af4ab35457325, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
