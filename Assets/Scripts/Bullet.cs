@@ -17,6 +17,9 @@ public class Bullet : MonoBehaviour
     [Header("VFX")]
     public ParticleSystem hitEffect;
 
+    [Header("SFX")]
+    public AudioClip hitSound;
+
     public enum BulletOwner { Player, Enemy }
     public BulletOwner owner;
 
@@ -93,15 +96,16 @@ public class Bullet : MonoBehaviour
         // =========================
         if (owner == BulletOwner.Player && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            // 🔥 FIX: works with child colliders
             HitBox enemyHB = other.GetComponentInParent<HitBox>();
 
             if (enemyHB != null)
             {
                 enemyHB.Hit(damage);
 
-                DisableBullet();
                 PlayHitEffect(hitPoint, enemyHB.transform);
+                PlayHitSound(hitPoint);
+
+                DisableBullet();
                 return;
             }
         }
@@ -111,12 +115,13 @@ public class Bullet : MonoBehaviour
         // =========================
         if (owner == BulletOwner.Enemy && other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            // 🔥 FIX: works with child colliders
             PlayerHitBox playerHB = other.GetComponentInParent<PlayerHitBox>();
 
             if (playerHB != null)
             {
                 playerHB.Hit(damage);
+
+                PlayHitSound(hitPoint);
 
                 DisableBullet();
                 return;
@@ -132,6 +137,23 @@ public class Bullet : MonoBehaviour
         fx.transform.SetParent(parent);
 
         Destroy(fx.gameObject, 2f);
+    }
+
+    void PlayHitSound(Vector3 position)
+    {
+        if (hitSound == null) return;
+
+        GameObject audioObj = new GameObject("HitSound");
+        audioObj.transform.position = position;
+
+        AudioSource audioSource = audioObj.AddComponent<AudioSource>();
+        audioSource.clip = hitSound;
+        audioSource.spatialBlend = 1f; // 3D sound
+        audioSource.playOnAwake = false;
+
+        audioSource.Play();
+
+        Destroy(audioObj, hitSound.length);
     }
 
     void DisableBullet()

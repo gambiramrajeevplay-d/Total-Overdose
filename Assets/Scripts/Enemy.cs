@@ -37,6 +37,9 @@ public class Enemy : MonoBehaviour
     // 🔥 Track bullets fired by this enemy
     private List<Bullet> spawnedBullets = new List<Bullet>();
 
+    [Header("Audio")]
+    public AudioClip deathSound;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -152,6 +155,7 @@ public class Enemy : MonoBehaviour
         deathTriggered = true;
 
         isDead = true;
+        PlayOneShotSound(deathSound, transform.position);
 
         CancelInvoke();
 
@@ -175,5 +179,22 @@ public class Enemy : MonoBehaviour
             player.OnEnemyKilled(postKillAction);
 
         Destroy(gameObject, 2f);
+    }
+    void PlayOneShotSound(AudioClip clip, Vector3 position)
+    {
+        if (clip == null) return;
+
+        GameObject audioObj = new GameObject("EnemyDeathSound");
+        audioObj.transform.position = position;
+
+        AudioSource source = audioObj.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.spatialBlend = 1f; // 3D sound
+        source.playOnAwake = false;
+        source.priority = 20; // high priority
+
+        source.Play();
+
+        Destroy(audioObj, clip.length);
     }
 }

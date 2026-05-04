@@ -8,6 +8,7 @@ TagManager:
   - Player_Main
   - Health_Fill
   - Health_Text
+  - ShootButton
   layers:
   - Default
   - TransparentFX

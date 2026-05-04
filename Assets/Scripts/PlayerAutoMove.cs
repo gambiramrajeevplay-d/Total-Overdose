@@ -64,12 +64,26 @@ public class PlayerAutoMove : MonoBehaviour
     private bool moveWithAction = false;
     private Transform actionTarget;
     private bool isMovingAfterKill = false;
+    private ThirdPersonCamera cam;
 
+    [Header("Audio")]
+    public AudioClip footstepSound;
+    public AudioClip actionSound;
+    public AudioClip deathSound;
+
+    [Header("Footstep Settings")]
+    public int footstepPriority = 200;
+
+    [Header("Action Settings")]
+    public float actionSoundDelay = 2f;
+    public int actionPriority = 50;
+
+    private AudioSource footstepSource;
     void Start()
     {
         if (rb == null)
             rb = GetComponent<Rigidbody>();
-
+        cam = FindObjectOfType<ThirdPersonCamera>();
         anim.updateMode = AnimatorUpdateMode.Normal;
         anim.speed = 1f;
 
@@ -77,6 +91,12 @@ public class PlayerAutoMove : MonoBehaviour
 
         if (aimSprite != null)
             aimSprite.SetActive(false);
+        footstepSource = gameObject.AddComponent<AudioSource>();
+        footstepSource.clip = footstepSound;
+        footstepSource.loop = true;
+        footstepSource.spatialBlend = 1f;
+        footstepSource.playOnAwake = false;
+        footstepSource.priority = footstepPriority;
     }
 
     void FixedUpdate()
@@ -163,6 +183,7 @@ public class PlayerAutoMove : MonoBehaviour
     {
         isPerformingAction = false;
     }
+  
     void UpdateAimPosition()
     {
         if (aimSprite == null || currentHitBox == null) return;
@@ -204,6 +225,9 @@ public class PlayerAutoMove : MonoBehaviour
 
         isDead = true;
 
+        // 🔊 PLAY ONE SHOT DEATH SOUND
+        PlayOneShotSound(deathSound, transform.position);
+
         isShooting = false;
         CancelInvoke();
 
@@ -240,10 +264,12 @@ public class PlayerAutoMove : MonoBehaviour
             anim.SetBool("isRunning", false);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
+           
             if (EnemyManager.Instance.AllEnemiesDead)
             {
                 GameManager.Instance.OnWin();
             }
+
 
             return;
         }
@@ -266,12 +292,31 @@ public class PlayerAutoMove : MonoBehaviour
 
             anim.SetBool("isRunning", true);
             RegisterAction();
+
+            if (!isShooting && !isPerformingAction)
+            {
+                if (!footstepSource.isPlaying && footstepSound != null)
+                {
+                    footstepSource.Play();
+                }
+            }
+            else
+            {
+                if (footstepSource.isPlaying)
+                {
+                    footstepSource.Stop();
+                }
+            }
+
         }
         else
         {
             currentIndex++;
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             anim.SetBool("isRunning", false);
+
+            if (footstepSource.isPlaying)
+                footstepSource.Stop();
         }
     }
 
@@ -280,11 +325,12 @@ public class PlayerAutoMove : MonoBehaviour
         if (currentHitBox != null) return;
 
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayer);
-
+      
         if (hits.Length == 0)
         {
             isInCombat = false;
             currentHitBox = null;
+            if (cam != null) cam.SetShooting(false);
             return;
         }
 
@@ -295,7 +341,7 @@ public class PlayerAutoMove : MonoBehaviour
 
             currentHitBox = hb;
             isInCombat = true;
-
+            if (cam != null) cam.SetShooting(true);
             rb.velocity = Vector3.zero;
             anim.SetBool("isRunning", false);
             break;
@@ -316,8 +362,15 @@ public class PlayerAutoMove : MonoBehaviour
         if (!isInCombat || currentHitBox == null || isShooting || isDead || isPerformingAction)
             return;
 
+        if (footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
         {
+          
+
             isShooting = true;
 
             anim.ResetTrigger("Shoot");
@@ -327,7 +380,6 @@ public class PlayerAutoMove : MonoBehaviour
             Invoke(nameof(EndShoot), 0.4f);
         }
     }
-
     void ShootBullet()
     {
         if (currentHitBox == null || isDead) return;
@@ -348,12 +400,19 @@ public class PlayerAutoMove : MonoBehaviour
 
     void EndShoot()
     {
+        if (cam != null) cam.SetShooting(false);
         isShooting = false;
     }
 
     public void OnEnemyKilled(PostKillAction action)
     {
         if (currentIndex >= points.Count) return;
+
+        if (footstepSource.isPlaying)
+        {
+            footstepSource.Stop();
+        }
+
 
         actionTarget = points[currentIndex];
 
@@ -363,8 +422,9 @@ public class PlayerAutoMove : MonoBehaviour
 
         isInCombat = false;
 
-        // 🔥 LOCK INPUT HERE
-        isPerformingAction = true;
+        // 🔊 PLAY ACTION SOUND HERE
+        StartCoroutine(PlayActionSoundWithDelay());
+
         TriggerSlowMotion();
 
         if (action == PostKillAction.Dodge)
@@ -372,7 +432,23 @@ public class PlayerAutoMove : MonoBehaviour
         else
             anim.SetTrigger("Roll");
     }
+    IEnumerator PlayActionSoundWithDelay()
+    {
+        yield return new WaitForSeconds(actionSoundDelay);
 
+        if (actionSound == null) yield break;
+
+        GameObject audioObj = new GameObject("ActionSound");
+        audioObj.transform.position = transform.position;
+
+        AudioSource source = audioObj.AddComponent<AudioSource>();
+        source.clip = actionSound;
+        source.spatialBlend = 1f;
+        source.priority = actionPriority;
+        source.Play();
+
+        Destroy(audioObj, actionSound.length);
+    }
     public void TriggerSlowMotion()
     {
         if (!isSlowMotionActive)
@@ -399,5 +475,35 @@ public class PlayerAutoMove : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
 
         isSlowMotionActive = false;
+    }
+    public void MobileShoot()
+    {
+        if (!isInCombat || currentHitBox == null || isShooting || isDead || isPerformingAction)
+            return;
+
+        isShooting = true;
+
+        anim.ResetTrigger("Shoot");
+        anim.SetTrigger("Shoot");
+
+        Invoke(nameof(ShootBullet), 0.2f);
+        Invoke(nameof(EndShoot), 0.4f);
+    }
+    void PlayOneShotSound(AudioClip clip, Vector3 position, int priority = 128)
+    {
+        if (clip == null) return;
+
+        GameObject audioObj = new GameObject("OneShotAudio");
+        audioObj.transform.position = position;
+
+        AudioSource source = audioObj.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.spatialBlend = 1f;
+        source.priority = priority;
+        source.playOnAwake = false;
+
+        source.Play();
+
+        Destroy(audioObj, clip.length);
     }
 }
