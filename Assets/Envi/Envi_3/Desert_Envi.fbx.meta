@@ -1,0 +1,339 @@
+fileFormatVersion: 2
+guid: e799b9622c6731549a9fabf3c1504676
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barreier
+    second: {fileID: 2100000, guid: d4892de1cb60b8a47bf4ca230cbd473f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrier_A
+    second: {fileID: 2100000, guid: a6e9af95fd96938408502fed4cd7fad3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Oil_Drum_Red
+    second: {fileID: 2100000, guid: 8b497d1b400a527478d49b6844c5dfa7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OilTank
+    second: {fileID: 2100000, guid: 894f2c554d5f981499c2076c2d04b0e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SandBags
+    second: {fileID: 2100000, guid: 2c1e32904d421c64d8ce2072655b91b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Truss
+    second: {fileID: 2100000, guid: 56ee9153bf10dc744af58c6b22060bf8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WheelFence
+    second: {fileID: 2100000, guid: fb3196af330363049bcefbd1e2566126, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ground
+    second: {fileID: 2100000, guid: d18b517397d31694c87ccf0183b77960, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house1
+    second: {fileID: 2100000, guid: 37053b7bd7b7ba04eaf7548fd67cd5c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house2
+    second: {fileID: 2100000, guid: d591e51b66609c746bbe81afe5cc65cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house4
+    second: {fileID: 2100000, guid: e879b89a57a2af64da25163367a63a45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house5
+    second: {fileID: 2100000, guid: b4112f7b36498bc4aaf2a074e092cb57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house6
+    second: {fileID: 2100000, guid: 9b73c1cf5b772ce489b5f8645d560355, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: obstacle-rond-hdide
+    second: {fileID: 2100000, guid: 2b31c86375860e1498d5bbb95b434396, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop1_A
+    second: {fileID: 2100000, guid: 9c4b4512dd3617d408c5c5c531a0f69d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: prop_B
+    second: {fileID: 2100000, guid: 88c83f46d9d03244eb4ebe50634d61b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: side bar
+    second: {fileID: 2100000, guid: e360d2e857b4ebe4f86ad367b3e0e151, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tree_barks_atlas
+    second: {fileID: 2100000, guid: 6f7ca4b566185bc41ae040e9b3bb8da0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trees_Leaves_atlases
+    second: {fileID: 2100000, guid: 534e70839ef28f34bae1c7037ca8fb25, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall_A
+    second: {fileID: 2100000, guid: f2c7f7624d08b264d80b6f89357c7629, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: walll
+    second: {fileID: 2100000, guid: 94af51cfbd9b6ef4ca3943f128a704c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: watchtower
+    second: {fileID: 2100000, guid: 2e3cd16039d44764984a09ec756b7790, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 2052d199606d40fe8349bc9259af5f46_RGB_trees Leaves atlases
+    second: {fileID: 2800000, guid: 440ac9f092d7cd14390e75d0176a145c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 30cc20811fc644f2bc6e985f46e15bfd_RGB_Oil_derrick_AlbedoTransparency
+    second: {fileID: 2800000, guid: 3960e2f0cd576a64fbe095354d88d004, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 379700052ea64b8399a4e5f125c1d78c_RGB_military_gabbione_ground_D
+    second: {fileID: 2800000, guid: e7ed0220764815346a467c39195af86b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 52eb7d67dd61417a80861321e68a25ca_RGB_wall2
+    second: {fileID: 2800000, guid: a92aabd6de422a7449abcb521e1d0051, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 7230a2d6de714f05889540fb46b95616_RGB_Desert_Building_Destroyed_V4_albedo
+    second: {fileID: 2800000, guid: 110b0690f0ca8b3438f31349291643fa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 9dd2b4ed392641269a7772da9ee5079b_RGB_concrete_barriers12_set_D_line
+    second: {fileID: 2800000, guid: 60f638f6b51ca9f4293bcf784cee1ff1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BRICKS_23_ALBEDO
+    second: {fileID: 2800000, guid: 84287650754026140a2b5e1da83f6cd3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Gun_Tower_1_AlbedoTransparency
+    second: {fileID: 2800000, guid: da451a2cbc8ffd440a13fe10e3527d3c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: House3_BaseColor
+    second: {fileID: 2800000, guid: f5699f17cc5b53e47ada7095f7515d3e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Material_baseColor
+    second: {fileID: 2800000, guid: 288a0445ed6abe04fae90cd680283c10, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Material_emissive
+    second: {fileID: 2800000, guid: d96027a93d96b784c99b88a98f098b5d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Material_normal
+    second: {fileID: 2800000, guid: 4bc2019149976464b939fd4dfb6b60dd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: OLDMETAL
+    second: {fileID: 2800000, guid: 01c711676ad90a042ba4a5b2420d31ea, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Oil_Drum_Red_Base_Color
+    second: {fileID: 2800000, guid: ee1bfcfea5c866f44a66deb197d0e2c3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Sand_Pirate
+    second: {fileID: 2800000, guid: 581c9cf4918b9cf48af1a29615216a88, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ccbe40ceb9b54d4785d6826bc7d9dab5_RGB_tree barks atlas
+    second: {fileID: 2800000, guid: 5c6766c8a00696e40856facfb5644559, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: eef3af91ac49462fb4ac3af25ee1899c_N_concrete_barriers12_set_N
+    second: {fileID: 2800000, guid: a8e8243172d290848a65f5832c1fb3d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: equipment_b_d2
+    second: {fileID: 2800000, guid: 6807115ef42c4b148bf895635831cc1c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: fence2_diffuse
+    second: {fileID: 2800000, guid: 51201322d6c754d4f93c9bfaea0481ee, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: modular_horror_house_kit_Material__218_Bas
+    second: {fileID: 2800000, guid: e3776293013be054e8305875909bad62, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: unknown_Base_Color
+    second: {fileID: 2800000, guid: 86adfc7b1c5edc043acba01cd71ec717, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: var2_desert_pbr_diffuse
+    second: {fileID: 2800000, guid: 4410d4a38a65a5d4bbc58edb96c227b9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: var6_desert_pbr_diffuse
+    second: {fileID: 2800000, guid: 298592946b361b04a93c27bc302042ac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: wall-tex-1
+    second: {fileID: 2800000, guid: 06415b665ad468c49b84f0c4c884b7ab, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.099999994
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
