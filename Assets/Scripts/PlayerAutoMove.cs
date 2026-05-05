@@ -81,6 +81,22 @@ public class PlayerAutoMove : MonoBehaviour
     private AudioSource footstepSource;
     void Start()
     {
+
+        GameObject parent = GameObject.FindGameObjectWithTag("Points");
+
+        if (parent == null)
+        {
+            Debug.LogError("Points parent not found!");
+            return;
+        }
+
+        points = new List<Transform>();
+
+        for (int i = 0; i < parent.transform.childCount; i++)
+        {
+            points.Add(parent.transform.GetChild(i));
+        }
+
         if (rb == null)
             rb = GetComponent<Rigidbody>();
         cam = FindObjectOfType<ThirdPersonCamera>();

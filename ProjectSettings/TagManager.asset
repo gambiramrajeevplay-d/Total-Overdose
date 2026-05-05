@@ -9,6 +9,7 @@ TagManager:
   - Health_Fill
   - Health_Text
   - ShootButton
+  - Points
   layers:
   - Default
   - TransparentFX
