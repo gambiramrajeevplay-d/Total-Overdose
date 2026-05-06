@@ -7,7 +7,7 @@ public class PlayerHitBox : MonoBehaviour
 
     public void Hit(int damage)
     {
-        Debug.Log("PLAYER GOT HIT"); // 🔥 DEBUG
+       // Debug.Log("PLAYER GOT HIT"); // 🔥 DEBUG
 
         if (playerHealth != null)
             playerHealth.TakeDamage(damage, "Enemy");
@@ -15,12 +15,13 @@ public class PlayerHitBox : MonoBehaviour
         // 🔥 SHOW DAMAGE UI
         if (damageUI != null)
         {
-            Debug.Log("SHOWING DAMAGE UI"); // 🔥 DEBUG
+           // Debug.Log("SHOWING DAMAGE UI"); // 🔥 DEBUG
             damageUI.ShowDamage();
         }
         else
         {
-            Debug.LogError("Damage UI NOT ASSIGNED!");
+           // Debug.LogError("Damage UI NOT ASSIGNED!");
         }
     }
+    
 }

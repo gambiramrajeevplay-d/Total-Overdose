@@ -70,6 +70,7 @@ public class PlayerAutoMove : MonoBehaviour
     public AudioClip footstepSound;
     public AudioClip actionSound;
     public AudioClip deathSound;
+    public AudioClip shootSound;
 
     [Header("Footstep Settings")]
     public int footstepPriority = 200;
@@ -79,6 +80,11 @@ public class PlayerAutoMove : MonoBehaviour
     public int actionPriority = 50;
 
     private AudioSource footstepSource;
+
+    [Header("Post Kill Movement")]
+    public float moveAfterKillDelay = 1f;
+    public float movementSmoothness = 8f;
+    public float rotationSmoothness = 12f;
     void Start()
     {
 
@@ -170,8 +176,7 @@ public class PlayerAutoMove : MonoBehaviour
         {
             Vector3 moveDir = dir.normalized;
 
-            float speedMultiplier = Mathf.Clamp01(distance / 2f);
-            float targetSpeed = moveSpeed * 1.8f * speedMultiplier;
+            float targetSpeed = moveSpeed * 1.5f;
 
             Vector3 targetVelocity = new Vector3(
                 moveDir.x * targetSpeed,
@@ -179,10 +184,22 @@ public class PlayerAutoMove : MonoBehaviour
                 moveDir.z * targetSpeed
             );
 
-            rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, Time.deltaTime * 8f);
+            rb.velocity = Vector3.Lerp(
+                rb.velocity,
+                targetVelocity,
+                Time.deltaTime * movementSmoothness
+            );
 
-            Quaternion rot = Quaternion.LookRotation(moveDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotationSpeed * Time.deltaTime * 2f);
+            Quaternion targetRot = Quaternion.LookRotation(moveDir);
+
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRot,
+                Time.deltaTime * rotationSmoothness
+            );
+
+            // smooth animation blend
+            anim.SetBool("isRunning", true);
         }
         else
         {
@@ -190,7 +207,13 @@ public class PlayerAutoMove : MonoBehaviour
             isPerformingAction = false;
             isMovingAfterKill = false;
 
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            rb.velocity = Vector3.Lerp(
+                rb.velocity,
+                Vector3.zero,
+                Time.deltaTime * movementSmoothness
+            );
+
+            anim.SetBool("isRunning", false);
         }
     }
 
@@ -258,6 +281,10 @@ public class PlayerAutoMove : MonoBehaviour
 
         anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         anim.SetTrigger("Die");
+        if (cam != null)
+        {
+            cam.SetDeadView(true);
+        }
 
         if (aimSprite != null)
             aimSprite.SetActive(false);
@@ -341,12 +368,15 @@ public class PlayerAutoMove : MonoBehaviour
         if (currentHitBox != null) return;
 
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayer);
-      
+
         if (hits.Length == 0)
         {
             isInCombat = false;
             currentHitBox = null;
-            if (cam != null) cam.SetShooting(false);
+
+            if (cam != null)
+                cam.SetShooting(false);
+
             return;
         }
 
@@ -375,8 +405,9 @@ public class PlayerAutoMove : MonoBehaviour
 
     void HandleShoot()
     {
-        if (!isInCombat || currentHitBox == null || isShooting || isDead || isPerformingAction)
+        if (!isInCombat || currentHitBox == null || isShooting || isDead || moveWithAction || isPerformingAction)
             return;
+        
 
         if (footstepSource.isPlaying)
         {
@@ -400,35 +431,71 @@ public class PlayerAutoMove : MonoBehaviour
     {
         if (currentHitBox == null || isDead) return;
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        // 🔥 instant gunshot sound
+        PlayOneShotSound(shootSound, transform.position, 40);
 
-        Vector3 dir = (currentHitBox.transform.position - firePoint.position).normalized;
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            firePoint.position,
+            Quaternion.identity
+        );
+
+        Vector3 dir =
+            (currentHitBox.transform.position - firePoint.position).normalized;
+
         bullet.transform.forward = dir;
 
         Bullet b = bullet.GetComponent<Bullet>();
+
         if (b != null)
         {
             b.SetTarget(currentHitBox.transform);
             b.owner = Bullet.BulletOwner.Player;
+
             spawnedBullets.Add(b);
         }
     }
 
     void EndShoot()
     {
-        if (cam != null) cam.SetShooting(false);
         isShooting = false;
-    }
 
+        // only disable if truly out of combat
+        if (!isInCombat && cam != null)
+        {
+            cam.SetShooting(false);
+        }
+    }
     public void OnEnemyKilled(PostKillAction action)
     {
         if (currentIndex >= points.Count) return;
+
+        StartCoroutine(HandlePostKill(action));
+    }
+    IEnumerator HandlePostKill(PostKillAction action)
+    {
+        // stay in combat state while enemy dies
+        isShooting = true;
+
+        // keep camera in shooting mode
+        if (cam != null)
+            cam.SetShooting(true);
+
+        // stop movement
+        rb.velocity = Vector3.zero;
 
         if (footstepSource.isPlaying)
         {
             footstepSource.Stop();
         }
 
+        // wait for enemy death animation
+        yield return new WaitForSeconds(moveAfterKillDelay);
+
+        // NOW exit combat
+        isInCombat = false;
+        isShooting = false;
+        currentHitBox = null;
 
         actionTarget = points[currentIndex];
 
@@ -436,13 +503,11 @@ public class PlayerAutoMove : MonoBehaviour
         isPerformingAction = true;
         isMovingAfterKill = true;
 
-        isInCombat = false;
-
-        // 🔊 PLAY ACTION SOUND HERE
         StartCoroutine(PlayActionSoundWithDelay());
 
         TriggerSlowMotion();
 
+        // roll instantly after delay
         if (action == PostKillAction.Dodge)
             anim.SetTrigger("Dodge");
         else

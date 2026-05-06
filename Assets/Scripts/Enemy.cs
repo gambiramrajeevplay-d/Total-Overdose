@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip deathSound;
+    public AudioClip shootSound;
 
     void Start()
     {
@@ -116,12 +117,22 @@ public class Enemy : MonoBehaviour
     {
         if (isDead) return;
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        // 🔥 enemy gunshot sound
+        PlayOneShotSound(shootSound, firePoint.position);
 
-        Vector3 dir = (playerHitBox.transform.position - firePoint.position).normalized;
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            firePoint.position,
+            Quaternion.identity
+        );
+
+        Vector3 dir =
+            (playerHitBox.transform.position - firePoint.position).normalized;
+
         bullet.transform.forward = dir;
 
         Bullet b = bullet.GetComponent<Bullet>();
+
         if (b != null)
         {
             b.SetTarget(playerHitBox.transform);
@@ -177,6 +188,12 @@ public class Enemy : MonoBehaviour
         // 🔥 THIS is where your flow starts
         if (player != null)
             player.OnEnemyKilled(postKillAction);
+        Collider[] cols = GetComponentsInChildren<Collider>();
+
+        foreach (Collider c in cols)
+        {
+            c.enabled = false;
+        }
 
         Destroy(gameObject, 2f);
     }
@@ -196,5 +213,10 @@ public class Enemy : MonoBehaviour
         source.Play();
 
         Destroy(audioObj, clip.length);
+    }
+    public void StopCombat()
+    {
+        CancelInvoke();
+        enabled = false;
     }
 }

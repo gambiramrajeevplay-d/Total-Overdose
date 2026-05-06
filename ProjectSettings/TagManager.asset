@@ -10,6 +10,8 @@ TagManager:
   - Health_Text
   - ShootButton
   - Points
+  - border
+  - Giveborder
   layers:
   - Default
   - TransparentFX

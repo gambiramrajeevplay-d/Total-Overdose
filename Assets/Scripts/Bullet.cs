@@ -17,11 +17,10 @@ public class Bullet : MonoBehaviour
     [Header("VFX")]
     public ParticleSystem hitEffect;
 
-    [Header("SFX")]
-    public AudioClip hitSound;
-
+   
     public enum BulletOwner { Player, Enemy }
     public BulletOwner owner;
+    public static List<Bullet> activeBullets = new List<Bullet>();
 
     // 🔥 prevent instant hit
     private float spawnTime;
@@ -34,6 +33,7 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         spawnTime = Time.time;
+        activeBullets.Add(this);
 
         if (rb != null)
         {
@@ -84,17 +84,20 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Time.time - spawnTime < minHitDelay) return;
+        if (Time.time - spawnTime < minHitDelay)
+            return;
 
-        if (hitColliders.Contains(other)) return;
+        if (hitColliders.Contains(other))
+            return;
+
         hitColliders.Add(other);
 
         Vector3 hitPoint = other.transform.position + Vector3.up * 0.5f;
 
         // =========================
-        // PLAYER → ENEMY
+        // PLAYER BULLET → ENEMY
         // =========================
-        if (owner == BulletOwner.Player && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (owner == BulletOwner.Player)
         {
             HitBox enemyHB = other.GetComponentInParent<HitBox>();
 
@@ -102,32 +105,52 @@ public class Bullet : MonoBehaviour
             {
                 enemyHB.Hit(damage);
 
-                PlayHitEffect(hitPoint, enemyHB.transform);
-                PlayHitSound(hitPoint);
-
                 DisableBullet();
                 return;
             }
         }
 
         // =========================
-        // ENEMY → PLAYER
+        // ENEMY BULLET → PLAYER
         // =========================
-        if (owner == BulletOwner.Enemy && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        //if (owner == BulletOwner.Enemy)
+        //{
+        //    PlayerHitBox playerHB = other.GetComponentInParent<PlayerHitBox>();
+
+        //    if (playerHB != null)
+        //    {
+        //        playerHB.Hit(damage);
+
+               
+        //        PlayHitSound(hitPoint);
+
+        //        DisableBullet();
+        //        return;
+        //    }
+        //}
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        // only for enemy bullets
+        if (owner != BulletOwner.Enemy)
+            return;
+
+        // hit player body
+        if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerHitBox playerHB = other.GetComponentInParent<PlayerHitBox>();
+            PlayerHitBox hb =
+                collision.gameObject.GetComponentInChildren<PlayerHitBox>();
 
-            if (playerHB != null)
+            if (hb != null)
             {
-                playerHB.Hit(damage);
-
-                PlayHitSound(hitPoint);
-
-                DisableBullet();
-                return;
+                hb.Hit(damage);
+               
             }
+
+            DisableBullet();
         }
     }
+
 
     void PlayHitEffect(Vector3 position, Transform parent)
     {
@@ -139,42 +162,43 @@ public class Bullet : MonoBehaviour
         Destroy(fx.gameObject, 2f);
     }
 
-    void PlayHitSound(Vector3 position)
-    {
-        if (hitSound == null) return;
-
-        GameObject audioObj = new GameObject("HitSound");
-        audioObj.transform.position = position;
-
-        AudioSource audioSource = audioObj.AddComponent<AudioSource>();
-        audioSource.clip = hitSound;
-        audioSource.spatialBlend = 1f; // 3D sound
-        audioSource.playOnAwake = false;
-
-        audioSource.Play();
-
-        Destroy(audioObj, hitSound.length);
-    }
+  
 
     void DisableBullet()
     {
-        if (rb != null)
-        {
-            rb.velocity = Vector3.zero;
-            rb.isKinematic = true;
-        }
+        //if (rb != null)
+        //{
+        //    rb.velocity = Vector3.zero;
+        //    rb.isKinematic = true;
+        //}
 
-        Collider col = GetComponent<Collider>();
-        if (col != null) col.enabled = false;
+        //Collider col = GetComponent<Collider>();
+        //if (col != null) col.enabled = false;
 
-        MeshRenderer rend = GetComponent<MeshRenderer>();
-        if (rend != null) rend.enabled = false;
+        //MeshRenderer rend = GetComponent<MeshRenderer>();
+        //if (rend != null) rend.enabled = false;
 
         Destroy(gameObject);
     }
+    public static void DestroyAllEnemyBullets()
+    {
+        for (int i = activeBullets.Count - 1; i >= 0; i--)
+        {
+            if (activeBullets[i] == null) continue;
 
+            if (activeBullets[i].owner == BulletOwner.Enemy)
+            {
+                Destroy(activeBullets[i].gameObject);
+            }
+        }
+    }
     public void SetTarget(Transform t)
     {
         target = t;
+    }
+
+    void OnDestroy()
+    {
+        activeBullets.Remove(this);
     }
 }

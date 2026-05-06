@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 1484168292260458565}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Respawn
+  m_TagString: Player_Main
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -864,6 +864,15 @@ MonoBehaviour:
   actionDuration: 0.4
   returnSpeed: 1.5
   postKillDuration: 5
+  footstepSound: {fileID: 0}
+  actionSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  footstepPriority: 200
+  actionSoundDelay: 2
+  actionPriority: 50
+  moveAfterKillDelay: 1
+  movementSmoothness: 8
+  rotationSmoothness: 12
 --- !u!54 &59452345726733886
 Rigidbody:
   m_ObjectHideFlags: 0

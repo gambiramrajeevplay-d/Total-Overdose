@@ -1087,7 +1087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &539874237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postKillAction: 2
   maxHealth: 100
-  detectionRange: 10
+  detectionRange: 15
   firstShotDelay: 3
   shootInterval: 2
   animator: {fileID: 539874238}
@@ -1144,6 +1144,7 @@ MonoBehaviour:
   firePoint: {fileID: 1541490503}
   healthBar: {fileID: 539874237}
   deathSound: {fileID: 8300000, guid: ee7029128a7c7664abd6fe9238852204, type: 3}
+  shootSound: {fileID: 8300000, guid: bc2722fc9606e7549a33ccc2b13a2aaf, type: 3}
 --- !u!4 &539874240
 Transform:
   m_ObjectHideFlags: 0
@@ -1153,7 +1154,7 @@ Transform:
   m_GameObject: {fileID: 539874236}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9991938, z: -0, w: 0.040148232}
-  m_LocalPosition: {x: -12.4, y: 0.543, z: 1.44}
+  m_LocalPosition: {x: -19.16, y: 0.543, z: 1.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1272,7 +1273,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.49
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1765,6 +1766,9 @@ MonoBehaviour:
   followSpeed: 10
   rotationSpeed: 10
   transitionSpeed: 5
+  deadOffset: {x: 0, y: 3, z: 0}
+  deadRotation: {x: 90, y: 0, z: 0}
+  shootingHoldTime: 0.3
 --- !u!1 &968961667
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,7 +2144,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5e085241e123cb44a84d2aa219cb789b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.86
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -16387,7 +16391,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!4 &2080891428061073529
 Transform:
   m_ObjectHideFlags: 0
@@ -37073,7 +37077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!33 &5372548916161455889
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -43056,8 +43060,8 @@ Transform:
   m_GameObject: {fileID: 7632561094641293439}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.222, z: 0}
-  m_LocalScale: {x: 1.447, y: 1, z: 1.8303539}
+  m_LocalPosition: {x: 0, y: 0.939, z: 0}
+  m_LocalScale: {x: 0.6325271, y: 1, z: 1.2810316}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 320746205111617218}
@@ -46839,7 +46843,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   aimSprite: {fileID: 4967616209459055141}
-  aimHeightOffset: 0.1
+  aimHeightOffset: 0.3
   aimScale: 1.1
   aimRotateSpeed: 50
   bulletPrefab: {fileID: 2403918692083132767, guid: 1145336dde2411747806e1643eca7fd7, type: 3}
@@ -46852,9 +46856,13 @@ MonoBehaviour:
   footstepSound: {fileID: 8300000, guid: 58f95d5272478d54cb3af0092b6ed775, type: 3}
   actionSound: {fileID: 8300000, guid: 31a5e8c059ac46d4ab01611838f7d9b5, type: 3}
   deathSound: {fileID: 8300000, guid: e134c807c1de8894bb60ad1ccf98c655, type: 3}
+  shootSound: {fileID: 8300000, guid: bc2722fc9606e7549a33ccc2b13a2aaf, type: 3}
   footstepPriority: 200
   actionSoundDelay: 0.5
   actionPriority: 50
+  moveAfterKillDelay: 1
+  movementSmoothness: 8
+  rotationSmoothness: 12
 --- !u!4 &6903285224173019741
 Transform:
   m_ObjectHideFlags: 0
@@ -58311,6 +58319,7 @@ MonoBehaviour:
   firePoint: {fileID: 9198934653012533540}
   healthBar: {fileID: 8589728990038175819}
   deathSound: {fileID: 8300000, guid: ee7029128a7c7664abd6fe9238852204, type: 3}
+  shootSound: {fileID: 8300000, guid: bc2722fc9606e7549a33ccc2b13a2aaf, type: 3}
 --- !u!4 &8642879308508602073
 Transform:
   m_ObjectHideFlags: 0
@@ -61696,6 +61705,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 963194228}
+  - {fileID: 480799820}
   - {fileID: 320746205111617218}
   - {fileID: 108549226353962633}
   - {fileID: 539874240}
@@ -61703,7 +61713,6 @@ SceneRoots:
   - {fileID: 583618131}
   - {fileID: 153972889}
   - {fileID: 1976030155}
-  - {fileID: 480799820}
   - {fileID: 2086586249}
   - {fileID: 1071758115}
   - {fileID: 152382531}

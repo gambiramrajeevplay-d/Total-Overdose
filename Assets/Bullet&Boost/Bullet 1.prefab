@@ -118,7 +118,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2403918692083132767}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   hitEffect: {fileID: 19845262, guid: fdac75e990da47649b31f10049c400b0, type: 3}
   hitSound: {fileID: 0}
   owner: 1
-  minHitDelay: 0.1
+  minHitDelay: 0.5
 --- !u!96 &9199383637040719799
 TrailRenderer:
   serializedVersion: 3

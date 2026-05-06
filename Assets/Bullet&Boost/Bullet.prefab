@@ -153,7 +153,7 @@ MonoBehaviour:
   lifeTime: 3
   damage: 40
   hitEffect: {fileID: 19845262, guid: fdac75e990da47649b31f10049c400b0, type: 3}
-  hitSound: {fileID: 8300000, guid: bc2722fc9606e7549a33ccc2b13a2aaf, type: 3}
+  hitSound: {fileID: 0}
   owner: 0
   minHitDelay: 0.1
 --- !u!96 &9199383637040719799

@@ -35,8 +35,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         // 💥 HIT EFFECT
-        if (hitEffect != null)
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
+       
 
         UpdateHealthUI();
 
@@ -64,11 +63,20 @@ public class PlayerHealth : MonoBehaviour
         // 💀 DEATH EFFECT
         if (deathEffect != null)
             Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+
+        foreach (Enemy e in enemies)
+        {
+            e.StopCombat();
+        }
+
+        Bullet.DestroyAllEnemyBullets();
 
         PlayerAutoMove player = GetComponent<PlayerAutoMove>();
         if (player != null)
         {
             player.KillPlayer();
         }
+
     }
 }

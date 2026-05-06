@@ -1470,9 +1470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729fc92a8e9bca44eb42d2e8b14b075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 1, z: -2}
+  normalOffset: {x: 0, y: 3, z: -5}
+  shootingOffset: {x: 1.5, y: 2.5, z: -3}
   followSpeed: 10
   rotationSpeed: 10
+  transitionSpeed: 5
 --- !u!1 &1022919514
 GameObject:
   m_ObjectHideFlags: 0
@@ -22525,12 +22527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2a0bbdc5824664ea0921d74c2c0902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-  - {fileID: 333830153}
-  - {fileID: 1022919516}
-  - {fileID: 680417616}
-  - {fileID: 1179165140}
-  - {fileID: 725785955}
+  points: []
   moveSpeed: 10
   rotationSpeed: 10
   stoppingDistance: 0.2
@@ -22551,6 +22548,12 @@ MonoBehaviour:
   actionDuration: 0.4
   returnSpeed: 1.5
   postKillDuration: 5
+  footstepSound: {fileID: 0}
+  actionSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  footstepPriority: 200
+  actionSoundDelay: 2
+  actionPriority: 50
 --- !u!4 &6559796638210472544
 Transform:
   m_ObjectHideFlags: 0

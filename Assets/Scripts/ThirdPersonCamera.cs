@@ -14,11 +14,25 @@ public class ThirdPersonCamera : MonoBehaviour
     [Header("Smooth Settings")]
     public float followSpeed = 10f;
     public float rotationSpeed = 5f;
-    public float transitionSpeed = 5f;
+    public float transitionSpeed = 8f;
+
+    [Header("Dead Offset")]
+    public Vector3 deadOffset = new Vector3(0, 8f, 0);
+
+    [Header("Dead Rotation")]
+    public Vector3 deadRotation = new Vector3(90f, 0f, 0f);
+
+    [Header("Combat Hold")]
+    public float shootingHoldTime = 0.3f;
 
     private Vector3 currentOffset;
+    private Vector3 currentVelocity;
 
     private bool isShooting = false;
+    private bool isDeadView = false;
+
+    // 🔥 prevents instant snap back
+    private float lastShootTime;
 
     void Start()
     {
@@ -40,27 +54,93 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         if (target == null) return;
 
-        // 🎯 Smooth offset switch
-        Vector3 targetOffset = isShooting ? shootingOffset : normalOffset;
-        currentOffset = Vector3.Lerp(currentOffset, targetOffset, transitionSpeed * Time.deltaTime);
+        // 🔥 hold shooting camera briefly
+        bool keepShootingView =
+            isShooting ||
+            Time.time - lastShootTime < shootingHoldTime;
 
-        // 🎯 Desired position
-        Vector3 desiredPosition = target.position + target.TransformDirection(currentOffset);
+        Vector3 targetOffset;
 
-        // 🧈 Smooth follow position
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
+        if (isDeadView)
+        {
+            targetOffset = deadOffset;
+        }
+        else if (keepShootingView)
+        {
+            targetOffset = shootingOffset;
+        }
+        else
+        {
+            targetOffset = normalOffset;
+        }
 
-        // 🔥 FIX: follow player rotation (no LookAt)
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            target.rotation,
-            rotationSpeed * Time.deltaTime
+        // smooth transition
+        currentOffset = Vector3.Lerp(
+            currentOffset,
+            targetOffset,
+            transitionSpeed * Time.deltaTime
         );
+
+        // desired position
+        Vector3 desiredPosition;
+
+        if (isDeadView)
+        {
+            // world space offset for top-down
+            desiredPosition = target.position + deadOffset;
+        }
+        else
+        {
+            // stable TPS shoulder offset
+            desiredPosition = target.position + (transform.rotation * currentOffset);
+        }
+
+        // smooth movement
+        transform.position = Vector3.SmoothDamp(
+     transform.position,
+     desiredPosition,
+     ref currentVelocity,
+     1f / followSpeed
+ );
+
+        Quaternion targetRot;
+
+        if (isDeadView)
+        {
+            targetRot = Quaternion.Euler(deadRotation);
+        }
+        else
+        {
+            Vector3 flatForward = target.forward;
+            flatForward.y = 0f;
+
+            if (flatForward.sqrMagnitude < 0.001f)
+            {
+                flatForward = transform.forward;
+            }
+
+            targetRot = Quaternion.LookRotation(flatForward);
+        }
+
+        transform.rotation = Quaternion.Lerp(
+    transform.rotation,
+    targetRot,
+    rotationSpeed * Time.deltaTime
+);
     }
 
-    // 🔥 Called from Player script
     public void SetShooting(bool value)
     {
         isShooting = value;
+
+        // 🔥 remember latest combat/shoot state
+        if (value)
+        {
+            lastShootTime = Time.time;
+        }
+    }
+    public void SetDeadView(bool value)
+    {
+        isDeadView = value;
     }
 }
