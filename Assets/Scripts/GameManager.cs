@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using Script;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -167,6 +168,9 @@ public class GameManager : MonoBehaviour
 
         gameEnded = true;
 
+        // ✅ GIVE 100 COINS
+        CurrecnyManager.instance?.AddCurrency(100);
+
         UnlockNextLevel();
 
         StopAllGameAudio();
@@ -180,7 +184,6 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0f;
     }
-
     // =========================
     // LOSE
     // =========================
@@ -246,6 +249,13 @@ public class GameManager : MonoBehaviour
     // =========================
     void UnlockNextLevel()
     {
+        // ❌ DO NOT UNLOCK FROM TUTORIAL
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            Debug.Log("Tutorial completed - next level NOT unlocked");
+            return;
+        }
+
         int unlockedLevel =
             PlayerPrefs.GetInt(StringsData.playerLevel, 1);
 
@@ -257,6 +267,8 @@ public class GameManager : MonoBehaviour
             );
 
             PlayerPrefs.Save();
+
+            Debug.Log("Unlocked Level: " + (currentLevelIndex + 1));
         }
     }
 

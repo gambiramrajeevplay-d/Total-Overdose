@@ -1,6 +1,7 @@
 ﻿using Script;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -127,11 +128,31 @@ public class Level_Button : MonoBehaviour
         {
             if (levelSelectionUI != null)
                 levelSelectionUI.ShowUnlockAllPanel();
+
             return;
         }
 
+        // SAVE LEVEL
         PlayerPrefs.SetInt(StringsData.levelToLoad, levelToLoad);
 
+        // ✅ USE TEMP VARIABLE
+        string targetScene = sceneNameToLoad;
+
+        // ✅ FIRST TIME LEVEL 1
+        if (levelToLoad == 1)
+        {
+            int tutorialPlayed = PlayerPrefs.GetInt("Level1TutorialPlayed", 0);
+
+            if (tutorialPlayed == 0)
+            {
+                PlayerPrefs.SetInt("Level1TutorialPlayed", 1);
+                PlayerPrefs.Save();
+
+                targetScene = "Tutorial";
+            }
+        }
+
+        // ✅ LOADING SCREEN STILL WORKS FOR TUTORIAL
         if (AndroidTV.IsAndroidOrFireTv())
         {
             if (loadingScreen) loadingScreen.SetActive(true);
@@ -143,13 +164,13 @@ public class Level_Button : MonoBehaviour
             if (loadingScreentab) loadingScreentab.SetActive(true);
         }
 
-        StartCoroutine(LoadLevelWithDelay());
+        StartCoroutine(LoadLevelWithDelay(targetScene));
     }
-
-    private IEnumerator LoadLevelWithDelay()
+    private IEnumerator LoadLevelWithDelay(string sceneName)
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(sceneNameToLoad);
+
+        SceneManager.LoadScene(sceneName);
     }
 
     public int GetLevelNumberSafe()

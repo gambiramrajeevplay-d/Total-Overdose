@@ -40,9 +40,10 @@ public class Enemy : MonoBehaviour
     [Header("Audio")]
     public AudioClip deathSound;
     public AudioClip shootSound;
-
+    public bool isTutorialEnemy;
     void Start()
     {
+      
         currentHealth = maxHealth;
 
         if (healthBar != null)
@@ -61,12 +62,19 @@ public class Enemy : MonoBehaviour
   
     void Update()
     {
+
+       
+
         if (isDead || playerHitBox == null) return;
 
         float distance = Vector3.Distance(transform.position, playerHitBox.transform.position);
 
         if (distance <= detectionRange)
         {
+            if (isTutorialEnemy)
+            {
+                TutorialManager.Instance.ShowTutorial();
+            }
             LookAtPlayer();
 
             if (animator != null)
@@ -96,6 +104,7 @@ public class Enemy : MonoBehaviour
 
     void LookAtPlayer()
     {
+        
         Vector3 dir = playerHitBox.transform.position - transform.position;
         dir.y = 0;
 
@@ -156,6 +165,10 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            if (isTutorialEnemy)
+            {
+                TutorialManager.Instance.HideTutorial();
+            }
             Die();
         }
     }

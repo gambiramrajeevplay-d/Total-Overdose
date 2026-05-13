@@ -15,7 +15,7 @@ public class CarControllerUI : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TMP_Text carNameText;
-    [SerializeField] private TMP_Text totalCoinsText;
+    [SerializeField] private TMP_Text currencyText;
     [SerializeField] private Image accel;
     [SerializeField] private Image boost;
     [SerializeField] private Image handling;
@@ -74,7 +74,7 @@ public class CarControllerUI : MonoBehaviour
     // =========================
     // UNITY
     // =========================
-
+  
     void Start()
     {
         PlayerPrefs.SetInt("car0", 1);
@@ -95,8 +95,8 @@ public class CarControllerUI : MonoBehaviour
         // ✅ SUBSCRIBE TO COIN CHANGES
         if (CurrecnyManager.instance != null)
         {
-            CurrecnyManager.instance.OnCurrencyChanged += OnCurrencyChanged;
-            UpdateCoinsUI();
+            CurrecnyManager.instance.OnCurrencyChanged += UpdateCoins;
+            UpdateCoins(CurrecnyManager.instance.GetCurrency());
         }
     }
 
@@ -104,23 +104,20 @@ public class CarControllerUI : MonoBehaviour
     {
         // ✅ UNSUBSCRIBE (IMPORTANT)
         if (CurrecnyManager.instance != null)
-            CurrecnyManager.instance.OnCurrencyChanged -= OnCurrencyChanged;
-    }
+        {
+            CurrecnyManager.instance.OnCurrencyChanged -= UpdateCoins;
+        }
+        // =========================
+        // CURRENCY
+        // =========================
 
-    // =========================
-    // CURRENCY
-    // =========================
-
-    void OnCurrencyChanged(int amount)
-    {
-        UpdateCoinsUI();
+       
     }
-
-    void UpdateCoinsUI()
-    {
-        if (totalCoinsText != null && CurrecnyManager.instance != null)
-            totalCoinsText.text = CurrecnyManager.instance.GetCurrency().ToString();
-    }
+ 
+        void UpdateCoins(int amount)
+        {
+            currencyText.text = amount.ToString();
+        }
 
     // =========================
     // NAVIGATION

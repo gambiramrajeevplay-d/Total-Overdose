@@ -48,7 +48,12 @@ public class CurrecnyManager : MonoBehaviour
         currentAmount += amount;
         Save();
     }
+    public void AddRewardCoins(int amount)
+    {
+        AddCurrency(amount);
 
+        Debug.Log("Reward Coins Added: " + amount);
+    }
     public bool SpendCurrency(int amount)
     {
         if (currentAmount < amount)

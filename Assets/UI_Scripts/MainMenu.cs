@@ -40,6 +40,27 @@ public class MainMenu : MonoBehaviour
         instance = this;
         Time.timeScale = 1f;
     }
+    private void OnEnable()
+    {
+        if (CurrecnyManager.instance != null)
+        {
+            CurrecnyManager.instance.OnCurrencyChanged += UpdateCoins;
+            UpdateCoins(CurrecnyManager.instance.GetCurrency());
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (CurrecnyManager.instance != null)
+        {
+            CurrecnyManager.instance.OnCurrencyChanged -= UpdateCoins;
+        }
+    }
+
+    void UpdateCoins(int amount)
+    {
+        currencyText.text = amount.ToString();
+    }
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -172,10 +193,13 @@ public class MainMenu : MonoBehaviour
     // =====================
     // CURRENCY
     // =====================
-    public void UpdateCurrencyText()
+    public void UpdateCurrencyText(int amount = 0)
     {
         if (currencyText != null && CurrecnyManager.instance != null)
-            currencyText.text = CurrecnyManager.instance.GetCurrency().ToString();
+        {
+            currencyText.text =
+                CurrecnyManager.instance.GetCurrency().ToString();
+        }
     }
 
     // =====================

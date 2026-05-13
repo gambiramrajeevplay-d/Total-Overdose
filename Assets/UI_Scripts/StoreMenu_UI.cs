@@ -20,15 +20,24 @@ public class StoreMenu_UI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (currecnyManager != null)
+        if (CurrecnyManager.instance != null)
         {
-            UpdateCurrenyText();
+            CurrecnyManager.instance.OnCurrencyChanged += UpdateCoins;
+            UpdateCoins(CurrecnyManager.instance.GetCurrency());
         }
+    }
 
-        if (animator != null)
+    private void OnDisable()
+    {
+        if (CurrecnyManager.instance != null)
         {
-            animator.SetTrigger("Entry");
+            CurrecnyManager.instance.OnCurrencyChanged -= UpdateCoins;
         }
+    }
+
+    void UpdateCoins(int amount)
+    {
+        currencyText.text = amount.ToString();
     }
 
     private void Start()
