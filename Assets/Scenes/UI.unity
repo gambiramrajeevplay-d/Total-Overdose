@@ -8987,7 +8987,7 @@ MonoBehaviour:
   - {fileID: 4030291969001155848}
   - {fileID: 7194147511774464781}
   carNameText: {fileID: 180534876}
-  totalCoinsText: {fileID: 855132585}
+  currencyText: {fileID: 855132585}
   accel: {fileID: 2141673301}
   boost: {fileID: 1859732204}
   handling: {fileID: 988166664}
@@ -19159,7 +19159,7 @@ MonoBehaviour:
   unlockFullGamePanel: {fileID: 1643480832}
   unlockFullGamePanelCloseButton: {fileID: 1590260944}
   horseSelectionMenu: {fileID: 685087434}
-  forceUnlockAllLevels: 1
+  forceUnlockAllLevels: 0
   currencyText: {fileID: 439074612}
 --- !u!114 &1558017826
 MonoBehaviour:

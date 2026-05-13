@@ -35,17 +35,35 @@ public class LevelSelectionUI : MonoBehaviour
 
     private void OnEnable()
     {
+        if (CurrecnyManager.instance != null)
+        {
+            CurrecnyManager.instance.OnCurrencyChanged += UpdateCoins;
+            UpdateCoins(CurrecnyManager.instance.GetCurrency());
+        }
+
+
         if (!isInitialized)
             return; // ⛔ prevent first-open bug
 
         //if (animator != null)
         //    animator.SetTrigger("Entry");
 
+
+
         UnlockLevels(); // ✅ highlight on reopen
         UpdateCurrencyText();
     }
-
-
+    private void OnDisable()
+    {
+        if (CurrecnyManager.instance != null)
+        {
+            CurrecnyManager.instance.OnCurrencyChanged -= UpdateCoins;
+        }
+    }
+    void UpdateCoins(int amount)
+    {
+        currencyText.text = amount.ToString();
+    }
 
     private void Start()
     {
@@ -146,14 +164,14 @@ public class LevelSelectionUI : MonoBehaviour
     }
 
 
-    void UpdateCurrencyText()
+    public void UpdateCurrencyText(int amount = 0)
     {
         if (currencyText != null && CurrecnyManager.instance != null)
         {
-            currencyText.text = CurrecnyManager.instance.GetCurrency().ToString();
+            currencyText.text =
+                CurrecnyManager.instance.GetCurrency().ToString();
         }
     }
-
 
     public void HighlightButton(int levelIndex)
     {

@@ -374,7 +374,7 @@ MonoBehaviour:
   postKillAction: 2
   maxHealth: 100
   detectionRange: 15
-  firstShotDelay: 3
+  firstShotDelay: 1
   shootInterval: 2
   animator: {fileID: 782493456435482300}
   bulletPrefab: {fileID: 2403918692083132767, guid: 553120459506f534caa8f9d1c86e0cb7, type: 3}
@@ -382,6 +382,7 @@ MonoBehaviour:
   healthBar: {fileID: 3745390668280150863}
   deathSound: {fileID: 8300000, guid: ee7029128a7c7664abd6fe9238852204, type: 3}
   shootSound: {fileID: 8300000, guid: bc2722fc9606e7549a33ccc2b13a2aaf, type: 3}
+  isTutorialEnemy: 0
 --- !u!95 &782493456435482300
 Animator:
   serializedVersion: 5
