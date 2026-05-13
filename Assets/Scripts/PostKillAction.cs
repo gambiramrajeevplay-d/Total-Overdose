@@ -1,6 +1,6 @@
 public enum PostKillAction
 {
-    None,
+    Roll,
     Dodge,
-    Roll
+    Jump
 }

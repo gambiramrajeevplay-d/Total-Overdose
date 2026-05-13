@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -12,7 +12,8 @@ public class DailyRewards_Final : MonoBehaviour
     public GameObject rewards;
 
     public GameObject subscriptionPanel;
-   
+    private bool rewardClaimed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,36 +122,64 @@ public class DailyRewards_Final : MonoBehaviour
     public Image rewardImage;
     public void RewardClaimButton()
     {
-        
+        // 🔥 BLOCK DOUBLE CLAIM
+        if (rewardClaimed)
+            return;
+
+        rewardClaimed = true;
+
         FirstRewardTime = DateTime.Now;
-        NextRewardTime = FirstRewardTime.AddDays(1);
-        PlayerPrefs.SetString("Day", NextRewardTime.ToString());
-        int coinsForToday = dailyCoins[dayValue];
+
+        NextRewardTime =
+            FirstRewardTime.AddDays(1);
+
+        PlayerPrefs.SetString(
+            "Day",
+            NextRewardTime.ToString()
+        );
+
+        int coinsForToday =
+            dailyCoins[dayValue];
+
         if (dayValue < 7)
         {
-            CurrecnyManager.instance?.AddCurrency(coinsForToday);
+            CurrecnyManager.instance?.
+                AddCurrency(coinsForToday);
 
             ShowRewardPopup(coinsForToday);
         }
-        else if (dayValue >= 7) 
+        else
         {
-            CurrecnyManager.instance.UnlockCar(2);
+            CurrecnyManager.instance
+                .UnlockCar(2);
 
             ShowRewardPopup();
         }
-        
-        
 
-        
         dayValue++;
-        PlayerPrefs.SetInt("DayValue", dayValue);
 
-        if(dayValue >= 7)
+        PlayerPrefs.SetInt(
+            "DayValue",
+            dayValue
+        );
+
+        if (dayValue >= 7)
         {
             dayValue = 0;
-            PlayerPrefs.SetInt("DayValue", dayValue);
+
+            PlayerPrefs.SetInt(
+                "DayValue",
+                dayValue
+            );
         }
-        
+
+        PlayerPrefs.Save();
+
+        // 🔥 DISABLE BUTTONS
+        foreach (Button b in rewardButtons)
+        {
+            b.interactable = false;
+        }
     }
     public void UnhighlightAllButtons()
     {
@@ -170,7 +199,7 @@ public class DailyRewards_Final : MonoBehaviour
     }
     void ShowRewardPopup(int coins)
     {
-        rewardPopupText.text = $" Recived {coins} coins...";
+        rewardPopupText.text = $" Received {coins} coins...";
         //rewardImage.sprite = dailySprites[dayValue];  // Change the sprite based on the current day
         rewardPopupPanel.SetActive(true);
         foreach (Button b in rewardButtons)

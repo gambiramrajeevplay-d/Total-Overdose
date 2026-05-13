@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         if (player != null)
             playerHitBox = player.GetComponentInChildren<PlayerHitBox>();
     }
-
+  
     void Update()
     {
         if (isDead || playerHitBox == null) return;
@@ -177,9 +177,11 @@ public class Enemy : MonoBehaviour
         foreach (Bullet b in spawnedBullets)
         {
             if (b != null)
+            {
+                b.gameObject.SetActive(false);
                 Destroy(b.gameObject);
+            }
         }
-
         spawnedBullets.Clear();
 
         if (EnemyManager.Instance != null)
@@ -195,7 +197,7 @@ public class Enemy : MonoBehaviour
             c.enabled = false;
         }
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject,2f);
     }
     void PlayOneShotSound(AudioClip clip, Vector3 position)
     {

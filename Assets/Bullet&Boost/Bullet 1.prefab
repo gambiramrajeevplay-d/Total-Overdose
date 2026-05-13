@@ -153,9 +153,8 @@ MonoBehaviour:
   lifeTime: 3
   damage: 5
   hitEffect: {fileID: 19845262, guid: fdac75e990da47649b31f10049c400b0, type: 3}
-  hitSound: {fileID: 0}
   owner: 1
-  minHitDelay: 0.5
+  minHitDelay: 0.1
 --- !u!96 &9199383637040719799
 TrailRenderer:
   serializedVersion: 3

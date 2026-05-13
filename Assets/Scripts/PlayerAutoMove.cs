@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 public class PlayerAutoMove : MonoBehaviour
 {
     [Header("Waypoints")]
@@ -85,10 +85,13 @@ public class PlayerAutoMove : MonoBehaviour
     public float moveAfterKillDelay = 1f;
     public float movementSmoothness = 8f;
     public float rotationSmoothness = 12f;
+    private bool gameStarted = false;
+
     void Start()
     {
-
+        SetupControls();
         GameObject parent = GameObject.FindGameObjectWithTag("Points");
+        anim.updateMode = AnimatorUpdateMode.UnscaledTime;
 
         if (parent == null)
         {
@@ -106,7 +109,7 @@ public class PlayerAutoMove : MonoBehaviour
         if (rb == null)
             rb = GetComponent<Rigidbody>();
         cam = FindObjectOfType<ThirdPersonCamera>();
-        anim.updateMode = AnimatorUpdateMode.Normal;
+        anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         anim.speed = 1f;
 
         lastActionTime = Time.time;
@@ -119,11 +122,48 @@ public class PlayerAutoMove : MonoBehaviour
         footstepSource.spatialBlend = 1f;
         footstepSource.playOnAwake = false;
         footstepSource.priority = footstepPriority;
+        rb.velocity = Vector3.zero;
+        anim.SetBool("isRunning", false);
     }
+    void SetupControls()
+    {
+        GameObject btnObj =
+            GameObject.FindGameObjectWithTag("ShootButton");
 
+        if (btnObj == null)
+            return;
+
+        if (PlatformManager.Instance.IsMobile())
+        {
+            btnObj.SetActive(true);
+
+            Button btn = btnObj.GetComponent<Button>();
+
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(MobileShoot);
+        }
+        else
+        {
+            btnObj.SetActive(false);
+        }
+    }
+    public void StartGameplay()
+    {
+        gameStarted = true;
+
+        anim.updateMode =
+            AnimatorUpdateMode.Normal;
+    }
     void FixedUpdate()
     {
         if (isDead) return;
+
+        if (!gameStarted)
+        {
+            rb.velocity = Vector3.zero;
+            anim.SetBool("isRunning", false);
+            return;
+        }
 
         if (!isInCombat && !isShooting)
         {
@@ -162,67 +202,70 @@ public class PlayerAutoMove : MonoBehaviour
                 aimSprite.SetActive(false);
         }
     }
-
     void HandleActionMovement()
     {
-        if (!moveWithAction || actionTarget == null) return;
+        if (!moveWithAction || actionTarget == null)
+            return;
 
         Vector3 dir = actionTarget.position - transform.position;
-        dir.y = 0;
+        dir.y = 0f;
 
         float distance = dir.magnitude;
 
-        if (distance > stoppingDistance)
-        {
-            Vector3 moveDir = dir.normalized;
-
-            float targetSpeed = moveSpeed * 1.5f;
-
-            Vector3 targetVelocity = new Vector3(
-                moveDir.x * targetSpeed,
-                rb.velocity.y,
-                moveDir.z * targetSpeed
-            );
-
-            rb.velocity = Vector3.Lerp(
-                rb.velocity,
-                targetVelocity,
-                Time.deltaTime * movementSmoothness
-            );
-
-            Quaternion targetRot = Quaternion.LookRotation(moveDir);
-
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRot,
-                Time.deltaTime * rotationSmoothness
-            );
-
-            // smooth animation blend
-            anim.SetBool("isRunning", true);
-        }
-        else
+        // stop instantly
+        if (distance <= stoppingDistance)
         {
             moveWithAction = false;
             isPerformingAction = false;
             isMovingAfterKill = false;
 
-            rb.velocity = Vector3.Lerp(
-                rb.velocity,
-                Vector3.zero,
-                Time.deltaTime * movementSmoothness
-            );
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
 
             anim.SetBool("isRunning", false);
+
+            return;
         }
+
+        Vector3 moveDir = dir.normalized;
+
+        // constant clean movement
+        Vector3 velocity = moveDir * (moveSpeed * 1.5f);
+        velocity.y = rb.velocity.y;
+
+        rb.velocity = velocity;
+
+        // smooth rotation only
+        Quaternion targetRot = Quaternion.LookRotation(moveDir);
+
+        rb.MoveRotation(
+            Quaternion.Slerp(
+                rb.rotation,
+                targetRot,
+                rotationSmoothness * Time.deltaTime
+            )
+        );
+
+        anim.SetBool("isRunning", true);
     }
 
     // 🔥 NEW: CALLED FROM ANIMATION EVENT
     public void OnActionComplete()
     {
+        moveWithAction = false;
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
         isPerformingAction = false;
+        isMovingAfterKill = false;
+
+        anim.SetBool("isRunning", false);
     }
-  
+    public void StartActionMove()
+    {
+        moveWithAction = true;
+    }
     void UpdateAimPosition()
     {
         if (aimSprite == null || currentHitBox == null) return;
@@ -405,6 +448,9 @@ public class PlayerAutoMove : MonoBehaviour
 
     void HandleShoot()
     {
+        if (!gameStarted)
+            return;
+
         if (!isInCombat || currentHitBox == null || isShooting || isDead || moveWithAction || isPerformingAction)
             return;
         
@@ -414,7 +460,39 @@ public class PlayerAutoMove : MonoBehaviour
             footstepSource.Stop();
         }
 
+        bool shootPressed = false;
+
+#if UNITY_EDITOR
+
+        if (PlatformManager.Instance.IsTV())
+        {
+            shootPressed =
+                Input.GetKeyDown(KeyCode.JoystickButton0);
+        }
+        else
+        {
+            shootPressed =
+                Input.GetKeyDown(KeyCode.Space);
+        }
+
+#else
+
+if (PlatformManager.Instance.IsTV())
+{
+    shootPressed =
+        Input.GetKeyDown(KeyCode.JoystickButton0);
+}
+
+#endif
+        // KEYBOARD TESTING
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
+        {
+            shootPressed = true;
+        }
+#endif
+
+        if (shootPressed)
         {
           
 
@@ -499,19 +577,28 @@ public class PlayerAutoMove : MonoBehaviour
 
         actionTarget = points[currentIndex];
 
-        moveWithAction = true;
+        moveWithAction = false;
         isPerformingAction = true;
         isMovingAfterKill = true;
-
         StartCoroutine(PlayActionSoundWithDelay());
 
         TriggerSlowMotion();
 
         // roll instantly after delay
-        if (action == PostKillAction.Dodge)
-            anim.SetTrigger("Dodge");
-        else
-            anim.SetTrigger("Roll");
+        switch (action)
+        {
+            case PostKillAction.Dodge:
+                anim.SetTrigger("Dodge");
+                break;
+
+            case PostKillAction.Roll:
+                anim.SetTrigger("Roll");
+                break;
+
+            case PostKillAction.Jump:
+                anim.SetTrigger("Jump");
+                break;
+        }
     }
     IEnumerator PlayActionSoundWithDelay()
     {
@@ -559,6 +646,9 @@ public class PlayerAutoMove : MonoBehaviour
     }
     public void MobileShoot()
     {
+        if (!gameStarted)
+            return;
+
         if (!isInCombat || currentHitBox == null || isShooting || isDead || isPerformingAction)
             return;
 
@@ -586,5 +676,12 @@ public class PlayerAutoMove : MonoBehaviour
         source.Play();
 
         Destroy(audioObj, clip.length);
+    }
+    public void ForceStopShooting()
+    {
+        CancelInvoke(nameof(ShootBullet));
+        CancelInvoke(nameof(EndShoot));
+
+        isShooting = false;
     }
 }

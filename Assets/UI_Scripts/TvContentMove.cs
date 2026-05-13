@@ -9,9 +9,9 @@ public class TvContentMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!AndroidTV.IsAndroidOrFireTv())
+       if (!AndroidTV.IsAndroidOrFireTv())
         {
-            contentmover.anchoredPosition = new Vector2(myval, 0);
+           contentmover.anchoredPosition = new Vector2(myval, 0);
            GetComponent<TvContentMove>().enabled = false;
         }
        

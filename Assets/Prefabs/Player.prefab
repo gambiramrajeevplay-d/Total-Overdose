@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 1484168292260458565}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player_Main
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -840,16 +840,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2a0bbdc5824664ea0921d74c2c0902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  points: []
   moveSpeed: 10
   rotationSpeed: 10
   stoppingDistance: 0.2
   rb: {fileID: 59452345726733886}
   anim: {fileID: 7571282491857440941}
-  detectionRadius: 10
+  detectionRadius: 7
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -864,9 +861,10 @@ MonoBehaviour:
   actionDuration: 0.4
   returnSpeed: 1.5
   postKillDuration: 5
-  footstepSound: {fileID: 0}
-  actionSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  footstepSound: {fileID: 8300000, guid: 58f95d5272478d54cb3af0092b6ed775, type: 3}
+  actionSound: {fileID: 8300000, guid: 31a5e8c059ac46d4ab01611838f7d9b5, type: 3}
+  deathSound: {fileID: 8300000, guid: ee7029128a7c7664abd6fe9238852204, type: 3}
+  shootSound: {fileID: 8300000, guid: bc2722fc9606e7549a33ccc2b13a2aaf, type: 3}
   footstepPriority: 200
   actionSoundDelay: 2
   actionPriority: 50
@@ -899,7 +897,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!136 &6625461304106968923
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2302,12 +2300,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

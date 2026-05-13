@@ -2006,12 +2006,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2881,9 +2881,13 @@ MonoBehaviour:
   footstepSound: {fileID: 8300000, guid: 58f95d5272478d54cb3af0092b6ed775, type: 3}
   actionSound: {fileID: 8300000, guid: 31a5e8c059ac46d4ab01611838f7d9b5, type: 3}
   deathSound: {fileID: 8300000, guid: e134c807c1de8894bb60ad1ccf98c655, type: 3}
+  shootSound: {fileID: 8300000, guid: bc2722fc9606e7549a33ccc2b13a2aaf, type: 3}
   footstepPriority: 200
   actionSoundDelay: 0.5
   actionPriority: 50
+  moveAfterKillDelay: 1
+  movementSmoothness: 8
+  rotationSmoothness: 12
 --- !u!54 &889124405813021813
 Rigidbody:
   m_ObjectHideFlags: 0

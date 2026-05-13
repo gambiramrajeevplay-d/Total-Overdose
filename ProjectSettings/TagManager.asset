@@ -12,6 +12,11 @@ TagManager:
   - Points
   - border
   - Giveborder
+  - KillCount
+  - Pass
+  - Fail
+  - Level
+  - Enemy
   layers:
   - Default
   - TransparentFX

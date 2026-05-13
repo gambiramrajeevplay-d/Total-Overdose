@@ -20,14 +20,14 @@ public class Pauser : MonoBehaviour
     // 🔒 GLOBAL PAUSE LOCK
     public static bool PauseLocked = false;
 
-    private void Awake()
-    {
-        instance = this;
-        AudioManagerPause.Initialize();
+   private void Awake()
+{
+    instance = this;
+    AudioManagerPause.Initialize();
 
-        // 🔥 Sync volume on start
-        AudioListener.volume = AudioManagerPause.IsMuted ? 0f : 1f;
-    }
+    // 🔥 REMOVE THIS
+    AudioListener.volume = AudioManagerPause.IsMuted ? 0f : 1f;
+}
 
     private void OnEnable()
     {
@@ -60,6 +60,7 @@ public class Pauser : MonoBehaviour
 
     public void Pause()
     {
+
         if (PauseLocked) return;
 
         PausePannel.SetActive(true);
@@ -67,6 +68,14 @@ public class Pauser : MonoBehaviour
 
         if (!AndroidTV.IsAndroidOrFireTv())
             PauseButton.SetActive(false);
+
+        PlayerAutoMove player =
+        FindObjectOfType<PlayerAutoMove>();
+
+        if (player != null)
+        {
+            player.ForceStopShooting();
+        }
 
         Time.timeScale = 0f;
 
@@ -147,4 +156,5 @@ public class Pauser : MonoBehaviour
             AudioListener.volume = 1f;
         }
     }
+
 }

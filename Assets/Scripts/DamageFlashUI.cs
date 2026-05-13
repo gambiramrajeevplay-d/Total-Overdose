@@ -33,25 +33,49 @@ public class DamageFlashUI : MonoBehaviour
 
     IEnumerator FadeRoutine()
     {
-        float t = 0f;
-
         Color c = damageImage.color;
-        c.a = 1f;
+
+        // start invisible
+        c.a = 0f;
         damageImage.color = c;
 
-        while (t < fadeDuration)
+        // =========================
+        // FADE IN
+        // =========================
+        float fadeInTime = 0.15f;
+        float t = 0f;
+
+        while (t < fadeInTime)
         {
             t += Time.deltaTime;
 
-            float alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
-
-            c.a = alpha;
+            c.a = Mathf.Lerp(0f, 1f, t / fadeInTime);
             damageImage.color = c;
 
             yield return null;
         }
 
-        // 🔥 hide again after fade
+        // small hold
+        yield return new WaitForSeconds(0.05f);
+
+        // =========================
+        // FADE OUT
+        // =========================
+        t = 0f;
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+
+            c.a = Mathf.Lerp(1f, 0f, t / fadeDuration);
+            damageImage.color = c;
+
+            yield return null;
+        }
+
+        c.a = 0f;
+        damageImage.color = c;
+
         damageImage.gameObject.SetActive(false);
     }
 }

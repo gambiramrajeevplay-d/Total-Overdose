@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManagerPause : MonoBehaviour
-
 {
-
     private static bool _isMuted = false;
 
     public static bool IsMuted
@@ -14,7 +10,9 @@ public class AudioManagerPause : MonoBehaviour
         set
         {
             _isMuted = value;
-            AudioListener.pause = _isMuted;
+
+            AudioListener.volume = _isMuted ? 0f : 1f;
+
             PlayerPrefs.SetInt("AudioMuted", _isMuted ? 1 : 0);
             PlayerPrefs.Save();
         }
@@ -23,8 +21,7 @@ public class AudioManagerPause : MonoBehaviour
     public static void Initialize()
     {
         _isMuted = PlayerPrefs.GetInt("AudioMuted", 0) == 1;
-        AudioListener.pause = _isMuted;
+
+        AudioListener.volume = _isMuted ? 0f : 1f;
     }
 }
-
-

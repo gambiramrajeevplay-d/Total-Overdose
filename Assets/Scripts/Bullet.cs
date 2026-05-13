@@ -78,8 +78,7 @@ public class Bullet : MonoBehaviour
             rb.velocity = shootDirection * speed;
         }
 
-        Vector3 rot = transform.eulerAngles;
-        transform.rotation = Quaternion.Euler(90f, rot.y, rot.z);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,19 +91,28 @@ public class Bullet : MonoBehaviour
 
         hitColliders.Add(other);
 
-        Vector3 hitPoint = other.transform.position + Vector3.up * 0.5f;
-
         // =========================
         // PLAYER BULLET → ENEMY
         // =========================
         if (owner == BulletOwner.Player)
         {
-            HitBox enemyHB = other.GetComponentInParent<HitBox>();
+            HitBox enemyHB = other.GetComponent<HitBox>();
+
+            if (enemyHB == null)
+                enemyHB = other.GetComponentInParent<HitBox>();
 
             if (enemyHB != null)
             {
+                // damage enemy
                 enemyHB.Hit(damage);
 
+                // play hit effect
+                PlayHitEffect(
+                    other.ClosestPoint(transform.position),
+                    enemyHB.transform
+                );
+
+                // destroy bullet immediately
                 DisableBullet();
                 return;
             }
@@ -113,21 +121,26 @@ public class Bullet : MonoBehaviour
         // =========================
         // ENEMY BULLET → PLAYER
         // =========================
-        //if (owner == BulletOwner.Enemy)
-        //{
-        //    PlayerHitBox playerHB = other.GetComponentInParent<PlayerHitBox>();
+        if (owner == BulletOwner.Enemy)
+        {
+            PlayerHitBox playerHB =
+                other.GetComponent<PlayerHitBox>();
 
-        //    if (playerHB != null)
-        //    {
-        //        playerHB.Hit(damage);
+            if (playerHB == null)
+                playerHB = other.GetComponentInParent<PlayerHitBox>();
 
-               
-        //        PlayHitSound(hitPoint);
+            if (playerHB != null)
+            {
+                // damage player
+                playerHB.Hit(damage);
 
-        //        DisableBullet();
-        //        return;
-        //    }
-        //}
+                // NO particle for player hit
+                gameObject.SetActive(false);
+                DisableBullet();
+                return;
+            }
+        }
+        gameObject.SetActive(false);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -149,6 +162,16 @@ public class Bullet : MonoBehaviour
 
             DisableBullet();
         }
+        if (owner == BulletOwner.Player)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                // trigger already handles damage
+                // collision only destroys bullet
+                DisableBullet();
+                return;
+            }
+        }
     }
 
 
@@ -162,22 +185,27 @@ public class Bullet : MonoBehaviour
         Destroy(fx.gameObject, 2f);
     }
 
-  
+
 
     void DisableBullet()
     {
-        //if (rb != null)
-        //{
-        //    rb.velocity = Vector3.zero;
-        //    rb.isKinematic = true;
-        //}
+        // stop movement immediately
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
 
-        //Collider col = GetComponent<Collider>();
-        //if (col != null) col.enabled = false;
+        // disable collider instantly
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+            col.enabled = false;
 
-        //MeshRenderer rend = GetComponent<MeshRenderer>();
-        //if (rend != null) rend.enabled = false;
+        // stop homing/tracking
+        enabled = false;
 
+        // destroy instantly
         Destroy(gameObject);
     }
     public static void DestroyAllEnemyBullets()
@@ -200,5 +228,9 @@ public class Bullet : MonoBehaviour
     void OnDestroy()
     {
         activeBullets.Remove(this);
+    }
+    public void ForceDestroy()
+    {
+        DisableBullet();
     }
 }
