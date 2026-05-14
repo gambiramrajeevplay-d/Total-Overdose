@@ -87,6 +87,7 @@ public class PlayerAutoMove : MonoBehaviour
     public float movementSmoothness = 8f;
     public float rotationSmoothness = 12f;
     private bool gameStarted = false;
+    private float shootBlockTimer = 0f;
 
     void Start()
     {
@@ -176,6 +177,12 @@ public class PlayerAutoMove : MonoBehaviour
     {
         if (isDead) return;
 
+        if (shootBlockTimer > 0f)
+        {
+            shootBlockTimer -= Time.unscaledDeltaTime;
+            return;
+        }
+
         DetectEnemy();
         HandleShoot();
 
@@ -202,6 +209,10 @@ public class PlayerAutoMove : MonoBehaviour
             if (aimSprite != null && aimSprite.activeSelf)
                 aimSprite.SetActive(false);
         }
+    }
+    public void BlockShootInput(float duration)
+    {
+        shootBlockTimer = duration;
     }
     void HandleActionMovement()
     {

@@ -111,6 +111,14 @@ public class Pauser : MonoBehaviour
         if (player != null)
         {
             player.ForceStopShooting();
+
+            // 🔥 BLOCK SPACE INPUT AFTER RESUME
+            player.BlockShootInput(0.2f);
+        }
+
+        if (player != null)
+        {
+            player.ForceStopShooting();
         }
     }
     public void MM()
