@@ -391,10 +391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 184299557}
+    m_SelectOnDown: {fileID: 49126285}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1026,10 +1026,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 729402103}
+    m_SelectOnDown: {fileID: 49126285}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2469,10 +2469,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 729402103}
+    m_SelectOnDown: {fileID: 184299557}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2499,7 +2499,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 729402102}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 796428737}
+        m_TargetAssemblyTypeName: Pauser, Assembly-CSharp
+        m_MethodName: ToggleSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &729402104
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2824,7 +2836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PausePannel: {fileID: 1352345015}
   LevelObject: {fileID: 792802423}
-  PauseButton: {fileID: 0}
+  PauseButton: {fileID: 244509771}
   soundIcon: {fileID: 729402102}
   sound_on: {fileID: 21300000, guid: 54b5651dd6d6f674590037e02ab70164, type: 3}
   sound_off: {fileID: 21300000, guid: c1882135f81b49b4780f9c58a97376fc, type: 3}
@@ -4447,9 +4459,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1820385094}
+  - {fileID: 729402105}
   - {fileID: 184299556}
   - {fileID: 49126284}
-  - {fileID: 729402105}
   m_Father: {fileID: 796428741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

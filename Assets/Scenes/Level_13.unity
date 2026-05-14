@@ -879,9 +879,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 930408272}
+  - {fileID: 1969456581}
   - {fileID: 2047828260}
   - {fileID: 684702710}
-  - {fileID: 1969456581}
   m_Father: {fileID: 771170380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1157,10 +1157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 2047828261}
+    m_SelectOnDown: {fileID: 684702711}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PausePannel: {fileID: 586832606}
   LevelObject: {fileID: 792802423}
-  PauseButton: {fileID: 0}
+  PauseButton: {fileID: 1224260558}
   soundIcon: {fileID: 1969456578}
   sound_on: {fileID: 21300000, guid: 54b5651dd6d6f674590037e02ab70164, type: 3}
   sound_off: {fileID: 21300000, guid: c1882135f81b49b4780f9c58a97376fc, type: 3}
@@ -4176,10 +4176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1969456579}
+    m_SelectOnDown: {fileID: 2047828261}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4206,7 +4206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1969456578}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 771170376}
+        m_TargetAssemblyTypeName: Pauser, Assembly-CSharp
+        m_MethodName: ToggleSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1969456580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4619,10 +4631,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1969456579}
+    m_SelectOnDown: {fileID: 684702711}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1

@@ -441,10 +441,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 117489933}
+    m_SelectOnDown: {fileID: 792682201}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2450,10 +2450,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 117489933}
+    m_SelectOnDown: {fileID: 1551633238}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4150,9 +4150,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1525692222}
+  - {fileID: 117489935}
   - {fileID: 792682200}
   - {fileID: 1551633237}
-  - {fileID: 117489935}
   m_Father: {fileID: 1604615390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5183,10 +5183,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 792682201}
+    m_SelectOnDown: {fileID: 1551633238}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -5824,7 +5824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PausePannel: {fileID: 1283627572}
   LevelObject: {fileID: 792802423}
-  PauseButton: {fileID: 0}
+  PauseButton: {fileID: 1278626166}
   soundIcon: {fileID: 117489932}
   sound_on: {fileID: 21300000, guid: 54b5651dd6d6f674590037e02ab70164, type: 3}
   sound_off: {fileID: 21300000, guid: c1882135f81b49b4780f9c58a97376fc, type: 3}

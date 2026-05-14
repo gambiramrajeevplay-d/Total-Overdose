@@ -308,10 +308,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 602795417}
+    m_SelectOnDown: {fileID: 192269504}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1580,10 +1580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1935263427}
+    m_SelectOnDown: {fileID: 192269504}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PausePannel: {fileID: 1438078805}
   LevelObject: {fileID: 792802423}
-  PauseButton: {fileID: 0}
+  PauseButton: {fileID: 1390936446}
   soundIcon: {fileID: 1935263426}
   sound_on: {fileID: 21300000, guid: 54b5651dd6d6f674590037e02ab70164, type: 3}
   sound_off: {fileID: 21300000, guid: c1882135f81b49b4780f9c58a97376fc, type: 3}
@@ -3348,9 +3348,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 390105218}
+  - {fileID: 1935263429}
   - {fileID: 602795416}
   - {fileID: 192269503}
-  - {fileID: 1935263429}
   m_Father: {fileID: 661989546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4108,10 +4108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1935263427}
+    m_SelectOnDown: {fileID: 602795417}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4138,7 +4138,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1935263426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 661989542}
+        m_TargetAssemblyTypeName: Pauser, Assembly-CSharp
+        m_MethodName: ToggleSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1935263428
 CanvasRenderer:
   m_ObjectHideFlags: 0

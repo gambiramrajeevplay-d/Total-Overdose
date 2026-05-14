@@ -403,10 +403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 339921181}
+    m_SelectOnDown: {fileID: 119932502}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1251,10 +1251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1109012696}
+    m_SelectOnDown: {fileID: 119932502}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -3653,8 +3653,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1109012695}
   - component: {fileID: 1109012698}
-  - component: {fileID: 1109012697}
   - component: {fileID: 1109012696}
+  - component: {fileID: 1109012697}
   - component: {fileID: 1109012699}
   m_Layer: 5
   m_Name: Sound
@@ -3696,10 +3696,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1109012696}
+    m_SelectOnDown: {fileID: 339921181}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -4298,9 +4298,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 539792671}
+  - {fileID: 1109012695}
   - {fileID: 339921180}
   - {fileID: 119932501}
-  - {fileID: 1109012695}
   m_Father: {fileID: 1851559375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
