@@ -3719,10 +3719,10 @@ RectTransform:
   - {fileID: 2025902031}
   m_Father: {fileID: 2086586249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.27}
+  m_AnchorMax: {x: 1, y: 0.81651855}
+  m_AnchoredPosition: {x: 0, y: 2.5}
+  m_SizeDelta: {x: 0, y: 4.2526855}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1627245855
 MonoBehaviour:
@@ -3737,7 +3737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8862745}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4859,8 +4859,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'ELIMINATE ALL THE ENEMIES '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 146ee8fc39e067f4e8ecdaed7776af7a, type: 2}
-  m_sharedMaterial: {fileID: -4059973956464852102, guid: 146ee8fc39e067f4e8ecdaed7776af7a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f5662558f7bd5441a34df71e8bf7caa, type: 2}
+  m_sharedMaterial: {fileID: -6821757132740040808, guid: 8f5662558f7bd5441a34df71e8bf7caa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4900,7 +4900,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -4950,8 +4950,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.6083333}
   m_AnchorMax: {x: 0.5, y: 0.6083333}
-  m_AnchoredPosition: {x: 0.000030518, y: 0}
-  m_SizeDelta: {x: 1314.4551, y: 296.2654}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1460.4382, y: 202.4433}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2054032059
 GameObject:
@@ -5339,10 +5339,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 2105043753}
+    m_SelectOnDown: {fileID: 127735507}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
