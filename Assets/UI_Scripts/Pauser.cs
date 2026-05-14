@@ -21,13 +21,13 @@ public class Pauser : MonoBehaviour
     public static bool PauseLocked = false;
 
    private void Awake()
-{
+   {
     instance = this;
     AudioManagerPause.Initialize();
 
     // 🔥 REMOVE THIS
     AudioListener.volume = AudioManagerPause.IsMuted ? 0f : 1f;
-}
+   }
 
     private void OnEnable()
     {
@@ -35,15 +35,27 @@ public class Pauser : MonoBehaviour
         UpdateSoundIcon(); // 🔥 update icon when opened
     }
 
-    private void Start()
+    void Start()
     {
+        // 🔒 ALWAYS LOCK IN TUTORIAL
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            PauseLocked = true;
+        }
+
         PauseButton.SetActive(!AndroidTV.IsAndroidOrFireTv());
-        UpdateSoundIcon(); // 🔥 initial icon
+        UpdateSoundIcon();
     }
 
     void Update()
     {
-        if (PauseLocked) return;
+        // 🔥 BLOCK PAUSE IF TUTORIAL OPEN
+        if (PauseLocked)
+            return;
+
+        //if (TutorialManager.Instance != null &&
+        //    TutorialManager.Instance.IsTutorialOpen())
+        //    return;
 
         if (GameManager.Instance != null)
         {
@@ -64,7 +76,7 @@ public class Pauser : MonoBehaviour
         if (PauseLocked) return;
 
         PausePannel.SetActive(true);
-        LevelObject.SetActive(false);
+       // LevelObject.SetActive(false);
 
         if (!AndroidTV.IsAndroidOrFireTv())
             PauseButton.SetActive(false);
@@ -85,14 +97,22 @@ public class Pauser : MonoBehaviour
     public void Resume()
     {
         PausePannel.SetActive(false);
-        LevelObject.SetActive(true);
+     //   LevelObject.SetActive(true);
 
         if (!AndroidTV.IsAndroidOrFireTv())
             PauseButton.SetActive(true);
 
         Time.timeScale = 1f;
-    }
 
+        // 🔥 FIX MOBILE SHOOT AFTER PAUSE
+        PlayerAutoMove player =
+            FindObjectOfType<PlayerAutoMove>();
+
+        if (player != null)
+        {
+            player.ForceStopShooting();
+        }
+    }
     public void MM()
     {
         Time.timeScale = 1f;   // 🔥 MUST RESET FIRST
@@ -133,9 +153,12 @@ public class Pauser : MonoBehaviour
 
     public static void UnlockPause()
     {
+        // ❌ NEVER UNLOCK IN TUTORIAL
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+            return;
+
         PauseLocked = false;
     }
-
     private void OnApplicationFocus(bool focus)
     {
         if (!focus)

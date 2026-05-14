@@ -167,9 +167,19 @@ public class GameManager : MonoBehaviour
         if (gameEnded) return;
 
         gameEnded = true;
+        Pauser.LockPause();
 
-        // ✅ GIVE 100 COINS
-        CurrecnyManager.instance?.AddCurrency(100);
+        // ❌ NO REWARD IN TUTORIAL
+        if (SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            CurrecnyManager.instance?.AddCurrency(100);
+
+            Debug.Log("100 Coins Rewarded");
+        }
+        else
+        {
+            Debug.Log("Tutorial completed - no coins rewarded");
+        }
 
         UnlockNextLevel();
 
@@ -192,6 +202,7 @@ public class GameManager : MonoBehaviour
         if (gameEnded) return;
 
         gameEnded = true;
+        Pauser.LockPause();
 
         StopAllGameAudio();
 

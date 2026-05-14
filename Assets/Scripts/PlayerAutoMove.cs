@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerAutoMove : MonoBehaviour
 {
@@ -306,6 +307,7 @@ public class PlayerAutoMove : MonoBehaviour
         if (isDead) return;
 
         isDead = true;
+        Pauser.LockPause();
 
         // 🔊 PLAY ONE SHOT DEATH SOUND
         PlayOneShotSound(deathSound, transform.position);
@@ -542,6 +544,7 @@ if (PlatformManager.Instance.IsTV())
         if (!isInCombat && cam != null)
         {
             cam.SetShooting(false);
+           
         }
     }
     public void OnEnemyKilled(PostKillAction action)
@@ -549,6 +552,7 @@ if (PlatformManager.Instance.IsTV())
         if (currentIndex >= points.Count) return;
 
         StartCoroutine(HandlePostKill(action));
+        
     }
     IEnumerator HandlePostKill(PostKillAction action)
     {
@@ -619,6 +623,7 @@ if (PlatformManager.Instance.IsTV())
     }
     public void TriggerSlowMotion()
     {
+        Pauser.LockPause();
         if (!isSlowMotionActive)
             StartCoroutine(SlowMotion());
     }
@@ -643,6 +648,10 @@ if (PlatformManager.Instance.IsTV())
         Time.fixedDeltaTime = 0.02f;
 
         isSlowMotionActive = false;
+        if (SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            Pauser.UnlockPause();
+        }
     }
     public void MobileShoot()
     {
@@ -683,5 +692,11 @@ if (PlatformManager.Instance.IsTV())
         CancelInvoke(nameof(EndShoot));
 
         isShooting = false;
+
+        // 🔥 RESET SHOOT STATE
+        anim.ResetTrigger("Shoot");
+
+        // optional but safer
+        anim.Play("Idle", 0, 0f);
     }
 }

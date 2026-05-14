@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -12,11 +12,26 @@ public class TutorialManager : MonoBehaviour
     {
         Instance = this;
 
-        HideTutorial();
+        // 🔥 CHECK IF TUTORIAL EXISTS IN SCENE
+        bool tutorialActive =
+            (mobileUI != null && mobileUI.activeSelf) ||
+            (tvUI != null && tvUI.activeSelf);
+
+        if (tutorialActive)
+        {
+            Pauser.LockPause();
+        }
+        else
+        {
+            HideTutorial();
+        }
     }
 
     public void ShowTutorial()
     {
+        // 🔒 ALWAYS LOCK WHILE TUTORIAL IS OPEN
+        Pauser.LockPause();
+
         if (PlatformManager.Instance.IsTV())
         {
             tvUI.SetActive(true);
@@ -33,5 +48,11 @@ public class TutorialManager : MonoBehaviour
     {
         mobileUI.SetActive(false);
         tvUI.SetActive(false);
+    }
+
+    // 🔥 OPTIONAL HELPER
+    public bool IsTutorialOpen()
+    {
+        return mobileUI.activeSelf || tvUI.activeSelf;
     }
 }
