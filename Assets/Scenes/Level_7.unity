@@ -2788,9 +2788,9 @@ RectTransform:
   - {fileID: 971784437}
   m_Father: {fileID: 1779764120}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.34885186}
-  m_AnchorMax: {x: 0.5, y: 0.34885186}
-  m_AnchoredPosition: {x: -0.000061035156, y: -10}
+  m_AnchorMin: {x: 0.5, y: 0.42470375}
+  m_AnchorMax: {x: 0.5, y: 0.42470375}
+  m_AnchoredPosition: {x: -0.000061035156, y: -8}
   m_SizeDelta: {x: 333, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1225609297
@@ -3500,8 +3500,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 33.917023}
+  m_SizeDelta: {x: 0, y: -617.56396}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1578166890
 MonoBehaviour:
@@ -3516,7 +3516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8862745}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4029,9 +4029,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1578166889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.6083333}
-  m_AnchorMax: {x: 0.5, y: 0.6083333}
-  m_AnchoredPosition: {x: -0.000030518, y: -0.000030517578}
+  m_AnchorMin: {x: 0.5, y: 0.6753502}
+  m_AnchorMax: {x: 0.5, y: 0.6753502}
+  m_AnchoredPosition: {x: -0.000030518, y: 1.9856262}
   m_SizeDelta: {x: 1347, y: 196.8126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852742664
@@ -4357,7 +4357,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1935263426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 661989542}
+        m_TargetAssemblyTypeName: Pauser, Assembly-CSharp
+        m_MethodName: ToggleSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1935263428
 CanvasRenderer:
   m_ObjectHideFlags: 0

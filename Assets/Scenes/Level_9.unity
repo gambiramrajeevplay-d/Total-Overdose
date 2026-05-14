@@ -2150,7 +2150,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 912859553}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1201483731}
+        m_TargetAssemblyTypeName: Pauser, Assembly-CSharp
+        m_MethodName: ToggleSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &912859555
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3433,8 +3445,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'ELIMINATE ALL THE ENEMIES '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 146ee8fc39e067f4e8ecdaed7776af7a, type: 2}
-  m_sharedMaterial: {fileID: -4059973956464852102, guid: 146ee8fc39e067f4e8ecdaed7776af7a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f5662558f7bd5441a34df71e8bf7caa, type: 2}
+  m_sharedMaterial: {fileID: -6821757132740040808, guid: 8f5662558f7bd5441a34df71e8bf7caa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
